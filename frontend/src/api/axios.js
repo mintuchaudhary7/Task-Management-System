@@ -1,8 +1,13 @@
 import axios from "axios";
 
+const BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:5000/api"
+    : "https://task-management-system-gt9h.onrender.com/api";
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api",
-  withCredentials: true, // useful if using cookies
+  baseURL: BASE_URL,
+  withCredentials: true,
   timeout: 10000,
 });
 
@@ -17,7 +22,7 @@ api.interceptors.request.use(
 
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 /* RESPONSE INTERCEPTOR */
@@ -33,7 +38,7 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(error.response?.data || error.message);
-  }
+  },
 );
 
 export default api;
