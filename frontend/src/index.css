@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/* =====================
+   BASE STYLES
+   ===================== */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui, Helvetica, Arial, sans-serif;
+}
+
+/* =====================
+   THEME VARIABLES
+   ===================== */
+@theme {
+  --color-primary: #1E1E2E;
+  --color-primary-hover: #2D2D44;
+
+  --color-secondary: #f5f5f5;
+
+  --color-buttonColor: #9cd3d9;
+  --color-buttonHover: #88C2C9;
+
+  --color-success: #16a34a;
+  --color-success-soft: #f0fdf4;
+
+  --color-danger: #dc2626;
+
+  --color-text-dark: #1f2937;
+  --color-text-light: #ffffff;
+  --color-text-muted: #6b7280;
+
+  --color-border: #e5e7eb;
+
+  --color-accent-blue: #3b82f6;
+  --color-accent-purple: #8b5cf6;
+  --color-accent-green: #22c55e;
+  --color-accent-orange: #f97316;
+
+  --color-card-bg: #ffffff;
+  --color-card-hover: #f9fafb;
+
+  --color-gradient-blue: linear-gradient(135deg, #3b82f6, #2563eb);
+  --color-gradient-purple: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  --color-gradient-green: linear-gradient(135deg, #22c55e, #16a34a);
+  --color-gradient-orange: linear-gradient(135deg, #f97316, #ea580c);
+
+  /* Pending */
+  --color-status-pending-bg: #fff1c1;
+  --color-status-pending-text: #92400e;
+  --color-status-pending-border: #facc15;
+
+  /* In Progress */
+  --color-status-progress-bg: #dbeafe;
+  --color-status-progress-text: #1e40af;
+  --color-status-progress-border: #60a5fa;
+
+  /* Completed */
+  --color-status-completed-bg: #d1fae5;
+  --color-status-completed-text: #065f46;
+  --color-status-completed-border: #34d399;
+}
+
+/* =====================
+   CUSTOM UTILITIES
+   ===================== */
+@layer utilities {
+  .status-pending {
+    background-color: var(--color-status-pending-bg);
+    color: var(--color-status-pending-text);
+    border-color: var(--color-status-pending-border);
+  }
+
+  .status-in-progress {
+    background-color: var(--color-status-progress-bg);
+    color: var(--color-status-progress-text);
+    border-color: var(--color-status-progress-border);
+  }
+
+  .status-completed {
+    background-color: var(--color-status-completed-bg);
+    color: var(--color-status-completed-text);
+    border-color: var(--color-status-completed-border);
+  }
+
+  /* Dashboard cards */
+  .card {
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.08);
+    transition: all 0.25s ease;
+  }
+
+  .card-hover:hover {
+    background-color: var(--color-card-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 20px 30px -15px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Gradient stat cards */
+  .stat-blue {
+    background: var(--color-gradient-blue);
+    color: white;
+  }
+
+  .stat-purple {
+    background: var(--color-gradient-purple);
+    color: white;
+  }
+
+  .stat-green {
+    background: var(--color-gradient-green);
+    color: white;
+  }
+
+  .stat-orange {
+    background: var(--color-gradient-orange);
+    color: white;
+  }
+
+  /* Subtle divider */
+  .divider {
+    height: 1px;
+    background-color: var(--color-border);
+  }
+}
+
+
+/* =====================
+   TAILWIND UTILITIES
+   ===================== */
+@tailwind utilities;
