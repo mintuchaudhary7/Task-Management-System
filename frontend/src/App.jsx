@@ -15,14 +15,20 @@ import Instances from "./pages/admin/Instances";
 import InstanceDetails from "./pages/admin/InstanceDetails";
 import Tasks from "./pages/admin/Tasks";
 
-// Doer pages
+// Member pages (previously doer)
 import DoerDashboard from "./pages/doer/Dashboard";
 import Profile from "./pages/doer/Profile";
+import DoerInstanceDetails from "./pages/doer/InstanceDetails";
+import TaskDetails from "./pages/doer/TaskDetails";
+
+
+
+// Unauthorized Page (Create it)
+import Unauthorized from "./pages/Unauthorized";
 
 function App() {
   return (
     <Routes>
-
       {/* PUBLIC */}
       <Route element={<MainLayout />}>
         <Route path="/" element={<LandingPage />} />
@@ -30,11 +36,14 @@ function App() {
 
       <Route path="/login" element={<Login />} />
 
-      {/* ✅ ADMIN ROUTES (GROUPED) */}
+      {/* UNAUTHORIZED */}
+      <Route path="/unauthorized" element={<Unauthorized />} />
+
+      {/* ADMIN ROUTES */}
       <Route
         path="/admin"
         element={
-          <ProtectedRoute role="ADMIN">
+          <ProtectedRoute allowedRoles={["ADMIN"]}>
             <AdminLayout />
           </ProtectedRoute>
         }
@@ -45,24 +54,26 @@ function App() {
         <Route path="instances" element={<Instances />} />
         <Route path="instances/:id" element={<InstanceDetails />} />
         <Route path="tasks" element={<Tasks />} />
+        <Route path="tasks/:taskId" element={<TaskDetails />} />
       </Route>
 
-      {/* ✅ DOER ROUTES (GROUPED) */}
+      {/* MEMBER ROUTES (MARKETER, REVIEWER, DESIGNER) */}
       <Route
-        path="/doer"
+        path="/member"
         element={
-          <ProtectedRoute role="DOER">
+          <ProtectedRoute allowedRoles={["MARKETER", "REVIEWER", "DESIGNER"]}>
             <DoerLayout />
           </ProtectedRoute>
         }
       >
         <Route path="dashboard" element={<DoerDashboard />} />
+        <Route path="instances/:id" element={<DoerInstanceDetails />} />
+        <Route path="tasks/:taskId" element={<TaskDetails />} />
         <Route path="profile" element={<Profile />} />
       </Route>
 
       {/* FALLBACK */}
       <Route path="*" element={<Navigate to="/" replace />} />
-
     </Routes>
   );
 }

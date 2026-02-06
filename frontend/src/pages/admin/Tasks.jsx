@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import Table from "../../components/Table";
 import { getAllTasks } from "../../api/task.api";
 
 const Tasks = () => {
+  const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -38,10 +39,10 @@ const Tasks = () => {
       render: (row) => (
         <span
           className={`px-2 py-1 rounded text-xs font-medium ${row.status === "completed"
-              ? "bg-green-100 text-green-700"
-              : row.status === "in-progress"
-                ? "bg-yellow-100 text-yellow-700"
-                : "bg-gray-100 text-gray-700"
+            ? "bg-green-100 text-green-700"
+            : row.status === "in-progress"
+              ? "bg-yellow-100 text-yellow-700"
+              : "bg-gray-100 text-gray-700"
             }`}
         >
           {row.status}
@@ -68,6 +69,7 @@ const Tasks = () => {
             columns={columns}
             data={tasks}
             emptyMessage="No tasks found."
+            onRowClick={(row) => navigate(`/admin/tasks/${row._id}`)}
           />
         )}
       </div>

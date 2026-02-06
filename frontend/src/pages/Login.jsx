@@ -5,7 +5,6 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 import { useAuth } from "../context/AuthContext";
 
-
 export default function Login() {
     const { login, user } = useAuth();
     const navigate = useNavigate();
@@ -30,19 +29,18 @@ export default function Login() {
             setLoading(true);
 
             const loggedInUser = await login({ email, password });
-            toast.success("Login successful!!!");
+
+            toast.success("Login successful!");
 
             if (loggedInUser.role === "ADMIN") {
                 navigate("/admin/dashboard");
-            } else if (loggedInUser.role === "DOER") {
-                navigate("/doer/dashboard");
             } else {
-                setError("Unknown user role");
-                toast.error("Unknown user role");
+                navigate("/member/dashboard");
             }
         } catch (err) {
-            setError(err?.message || "Login failed");
-            toast.error(err?.message || "Login failed");
+            const msg = err?.response?.data?.message || "Login failed";
+            setError(msg);
+            toast.error(msg);
         } finally {
             setLoading(false);
         }
@@ -50,8 +48,11 @@ export default function Login() {
 
     useEffect(() => {
         if (user) {
-            if (user.role === "ADMIN") navigate("/admin/dashboard");
-            else if (user.role === "DOER") navigate("/doer/dashboard");
+            if (user.role === "ADMIN") {
+                navigate("/admin/dashboard");
+            } else {
+                navigate("/member/dashboard");
+            }
         }
     }, [user, navigate]);
 
@@ -63,6 +64,7 @@ export default function Login() {
             >
                 Back To Home
             </button>
+
             <div className="w-full max-w-md bg-offWhite rounded-xl shadow-xl px-8 py-10 border border-border">
                 <h1 className="text-2xl font-bold text-center text-text-dark">
                     Welcome Back
@@ -110,16 +112,13 @@ export default function Login() {
                                 onClick={() => setShowPassword((prev) => !prev)}
                                 className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-dark"
                             >
-                                {showPassword ? <FaRegEyeSlash size={20} /> : <FaRegEye size={20} />}
+                                {showPassword ? (
+                                    <FaRegEyeSlash size={20} />
+                                ) : (
+                                    <FaRegEye size={20} />
+                                )}
                             </button>
                         </div>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                        <span />
-                        <a href="#" className="text-sm font-semibold text-dark hover:underline">
-                            Forgot password?
-                        </a>
                     </div>
 
                     <button
@@ -130,19 +129,6 @@ export default function Login() {
                         {loading ? "Logging in..." : "Login"}
                     </button>
                 </form>
-
-                <div className="my-6 flex items-center gap-3">
-                    <div className="h-px bg-border flex-1" />
-                    <span className="text-xs text-text-muted">OR</span>
-                    <div className="h-px bg-border flex-1" />
-                </div>
-
-                <p className="text-sm text-center text-text-muted">
-                    Don’t have an account?{" "}
-                    <a href="#" className="text-primary font-medium hover:underline">
-                        Sign up
-                    </a>
-                </p>
             </div>
         </div>
     );

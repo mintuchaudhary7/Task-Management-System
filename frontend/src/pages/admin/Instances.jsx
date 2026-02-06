@@ -33,9 +33,13 @@ const Instances = () => {
       header: "Template",
       render: (row) => row.templateId?.name || "—",
     },
+    // {
+    //   header: "Assigned User",
+    //   render: (row) => row.assignedUserId?.name || "—",
+    // },
     {
-      header: "Assigned User",
-      render: (row) => row.assignedUserId?.name || "—",
+      header: "Admin",
+      render: (row) => row.createdBy?.name || "—",
     },
     {
       header: "Created At",

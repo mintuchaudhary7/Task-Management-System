@@ -6,21 +6,37 @@ const Task = require("../models/Task");
 const getAdminStats = async (req, res) => {
   try {
     const totalUsers = await User.countDocuments();
-    const totalDoers = await User.countDocuments({ role: "DOER" });
+
+    const totalAdmins = await User.countDocuments({ role: "ADMIN" });
+    const totalMarketers = await User.countDocuments({ role: "MARKETER" });
+    const totalReviewers = await User.countDocuments({ role: "REVIEWER" });
+    const totalDesigners = await User.countDocuments({ role: "DESIGNER" });
+
+    const totalMembers = totalMarketers + totalReviewers + totalDesigners;
+
     const totalTemplates = await Template.countDocuments();
+    const totalInstances = await Instance.countDocuments();
     const totalTasks = await Task.countDocuments();
 
     res.status(200).json({
       success: true,
       stats: {
         totalUsers,
-        totalDoers,
+        totalAdmins,
+        totalMembers,
+        totalMarketers,
+        totalReviewers,
+        totalDesigners,
         totalTemplates,
+        totalInstances,
         totalTasks,
       },
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 

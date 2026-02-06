@@ -4,13 +4,17 @@ const router = express.Router();
 const {
   getAllTasks,
   getTasksByInstance,
-  updateTaskStatus, 
-  getTasksByUser
+  updateTaskStatus,
+  getTasksByUser,
+  taskDetails,
 } = require("../controllers/task.controller");
 
-router.get("/", getAllTasks); 
+const auth = require("../middlewares/auth");
+
+router.get("/", getAllTasks);
 router.get("/instance/:instanceId", getTasksByInstance);
-router.patch("/:taskId/status", updateTaskStatus);
-router.get("/:userId", getTasksByUser);
+router.patch("/:taskId/status", auth, updateTaskStatus);
+router.get("/details/:taskId", auth, taskDetails);
+router.get("/user/:userId", auth, getTasksByUser);
 
 module.exports = router;

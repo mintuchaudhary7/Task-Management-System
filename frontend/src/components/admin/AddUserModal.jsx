@@ -6,7 +6,7 @@ const AddUserModal = ({ onClose, onUserCreated }) => {
     name: "",
     email: "",
     password: "",
-    role: "DOER",
+    role: "MARKETER",
   });
 
   const handleChange = (e) => {
@@ -24,7 +24,7 @@ const AddUserModal = ({ onClose, onUserCreated }) => {
         name: "",
         email: "",
         password: "",
-        role: "DOER",
+        role: "MARKETER",
       });
     } catch (err) {
       console.error("Failed to create user", err);
@@ -85,7 +85,9 @@ const AddUserModal = ({ onClose, onUserCreated }) => {
             onChange={handleChange}
             className="w-full border border-border rounded-lg px-4 py-3 text-text-dark focus:outline-none focus:ring-2 focus:ring-accent-blue transition"
           >
-            <option value="DOER">Doer</option>
+            <option value="MARKETER">Marketer</option>
+            <option value="REVIEWER">Reviewer</option>
+            <option value="DESIGNER">Designer</option>
             <option value="ADMIN">Admin</option>
           </select>
 

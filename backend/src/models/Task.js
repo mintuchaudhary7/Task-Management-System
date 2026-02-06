@@ -19,11 +19,24 @@ const taskSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: ["pending", "in-progress", "completed"],
+      enum: [
+        "pending",
+        "in-progress",
+        "for-review",
+        "changes-requested",
+        "approved",
+        "completed",
+      ],
       default: "pending",
     },
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 module.exports = mongoose.model("Task", taskSchema);

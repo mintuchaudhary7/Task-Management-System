@@ -4,11 +4,15 @@ const router = express.Router();
 const {
   createInstance,
   getAllInstances,
-  getInstanceById
+  getInstanceById,
+  getUsersInstance,
 } = require("../controllers/instance.controller");
 
-router.post("/", createInstance);
-router.get("/", getAllInstances);
-router.get("/:id", getInstanceById)
+const auth = require("../middlewares/auth");
+
+router.post("/", auth, createInstance);
+router.get("/my-instances", auth, getUsersInstance);
+router.get("/", auth, getAllInstances);
+router.get("/:id", auth, getInstanceById);
 
 module.exports = router;

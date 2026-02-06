@@ -10,20 +10,26 @@ const DoerNavbar = () => {
 
   return (
     <nav className="h-14 bg-primary text-white flex items-center justify-between px-6 shadow-md">
-      <NavLink to="/doer/dashboard" className="font-bold text-buttonColor text-xl">
+      
+      {/* LOGO */}
+      <NavLink
+        to="/member/dashboard"
+        className="font-bold text-buttonColor text-xl"
+      >
         TASKLY
       </NavLink>
 
+      {/* LINKS */}
       <div className="flex items-center gap-6 text-sm font-medium">
         <NavLink
-          to="/doer/dashboard"
+          to="/member/dashboard"
           className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
         >
           Dashboard
         </NavLink>
 
         <NavLink
-          to="/doer/profile"
+          to="/member/profile"
           className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
         >
           Profile

@@ -45,9 +45,9 @@ const CreateTemplateModal = ({ onClose, onTemplateCreated }) => {
       setLoading(true);
       const res = await createTemplate(payload);
 
-      if (res?.data?.template) {
+      if (res?.template) {
         toast.success("Template created successfully");
-        onTemplateCreated(res.data.template);
+        onTemplateCreated(res.template);
         resetForm();
         onClose();
       }

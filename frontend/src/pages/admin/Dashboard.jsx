@@ -9,10 +9,11 @@ import OverviewCard from "../../components/cards/OverviewCard";
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
     totalUsers: 0,
-    totalDoers: 0,
+    totalMembers: 0,
     totalTemplates: 0,
     totalTasks: 0,
   });
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -30,6 +31,7 @@ const AdminDashboard = () => {
         setLoading(false);
       }
     };
+
     fetchStats();
   }, []);
 
@@ -55,9 +57,21 @@ const AdminDashboard = () => {
       {/* ===== STATS ===== */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard label="Total Users" value={stats.totalUsers} variant="blue" />
-        <StatCard label="Total Doers" value={stats.totalDoers} variant="purple" />
-        <StatCard label="Templates" value={stats.totalTemplates} variant="green" />
-        <StatCard label="Total Tasks" value={stats.totalTasks} variant="orange" />
+        <StatCard
+          label="Total Members"
+          value={stats.totalMembers}
+          variant="purple"
+        />
+        <StatCard
+          label="Templates"
+          value={stats.totalTemplates}
+          variant="green"
+        />
+        <StatCard
+          label="Total Tasks"
+          value={stats.totalTasks}
+          variant="orange"
+        />
       </div>
 
       <div className="my-10 divider" />
@@ -66,9 +80,18 @@ const AdminDashboard = () => {
       <div className="mb-10">
         <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <ActionCard title="Create User" description="Add Admin or Doer accounts" />
-          <ActionCard title="Create Template" description="Define reusable task templates" />
-          <ActionCard title="Create Instance" description="Assign projects to Doers" />
+          <ActionCard
+            title="Create User"
+            description="Add Admin or Member accounts"
+          />
+          <ActionCard
+            title="Create Template"
+            description="Define reusable task templates"
+          />
+          <ActionCard
+            title="Create Instance"
+            description="Assign projects to Members"
+          />
         </div>
       </div>
 
@@ -76,8 +99,14 @@ const AdminDashboard = () => {
       <div>
         <h2 className="text-xl font-semibold mb-4">System Overview</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <OverviewCard title="Instances" description="Track project execution across teams" />
-          <OverviewCard title="Tasks" description="Monitor task status & completion" />
+          <OverviewCard
+            title="Instances"
+            description="Track project execution across teams"
+          />
+          <OverviewCard
+            title="Tasks"
+            description="Monitor task status & completion"
+          />
         </div>
       </div>
     </div>

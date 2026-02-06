@@ -38,17 +38,30 @@ const Users = () => {
     { header: "Email", key: "email" },
     {
       header: "Role",
-      render: (row) => (
-        <span
-          className={`px-3 py-1 rounded-full text-xs font-medium ${
-            row.role === "ADMIN"
-              ? "bg-accent-purple text-white"
-              : "bg-accent-blue text-white"
-          }`}
-        >
-          {row.role === "ADMIN" ? "Admin" : "Doer"}
-        </span>
-      ),
+      render: (row) => {
+        const roleColors = {
+          ADMIN: "bg-accent-purple text-white",
+          MARKETER: "bg-accent-blue text-white",
+          REVIEWER: "bg-accent-orange text-white",
+          DESIGNER: "bg-accent-green text-white",
+        };
+
+        const roleLabel = {
+          ADMIN: "Admin",
+          MARKETER: "Marketer",
+          REVIEWER: "Reviewer",
+          DESIGNER: "Designer",
+        };
+
+        return (
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-medium ${roleColors[row.role] || "bg-gray-500 text-white"
+              }`}
+          >
+            {roleLabel[row.role] || row.role}
+          </span>
+        );
+      },
     },
     {
       header: "Status",

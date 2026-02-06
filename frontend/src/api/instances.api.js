@@ -9,3 +9,7 @@ export const createInstance = (data) => {
 export const getInstanceById = (id) => {
   return api.get(`/instances/${id}`);
 };
+
+export const getMyInstances = async () => {
+  return await api.get("/instances/my-instances");
+};

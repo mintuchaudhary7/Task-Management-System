@@ -61,6 +61,23 @@ body,
   --color-status-completed-bg: #d1fae5;
   --color-status-completed-text: #065f46;
   --color-status-completed-border: #34d399;
+
+  /* For Review */
+  --color-status-review-bg: #ede9fe;
+  --color-status-review-text: #5b21b6;
+  --color-status-review-border: #a78bfa;
+
+  /* Changes Requested */
+  --color-status-changes-bg: #fee2e2;
+  --color-status-changes-text: #991b1b;
+  --color-status-changes-border: #f87171;
+
+  /* Approved */
+  --color-status-approved-bg: #cffafe;
+  --color-status-approved-text: #155e75;
+  --color-status-approved-border: #22d3ee;
+
+
 }
 
 /* =====================
@@ -84,6 +101,25 @@ body,
     color: var(--color-status-completed-text);
     border-color: var(--color-status-completed-border);
   }
+
+  .status-review {
+    background-color: var(--color-status-review-bg);
+    color: var(--color-status-review-text);
+    border-color: var(--color-status-review-border);
+  }
+
+  .status-changes {
+    background-color: var(--color-status-changes-bg);
+    color: var(--color-status-changes-text);
+    border-color: var(--color-status-changes-border);
+  }
+
+  .status-approved {
+    background-color: var(--color-status-approved-bg);
+    color: var(--color-status-approved-text);
+    border-color: var(--color-status-approved-border);
+  }
+
 
   /* Dashboard cards */
   .card {
